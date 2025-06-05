@@ -43,19 +43,11 @@ export function BookmarkCard({
             className="h-full flex flex-col justify-between items-center"
             id={id}
           >
-            {imgPreview ? (
-              <img
-                className="rounded-t-md w-full h-fit max-h-[160px] object-fill"
-                src={imgPreview}
-                alt={`${title} preview`}
-              />
-            ) : (
-              <img
-                className="rounded-t-md w-full h-fit max-h-[160px] object-fill"
-                src={imgFallback}
-                alt={`${title} preview`}
-              />
-            )}
+            <img
+              className="rounded-t-md w-full h-fit max-h-[160px] min-h-[160px] object-fill"
+              src={imgPreview || imgFallback}
+              alt={`${title} preview`}
+            />
 
             <div className="p-2 flex justify-center items-center flex-col mb-2">
               <h3 className="font-semibold text-md mb-1 dark:text-slate-700 text-slate-800">
@@ -71,19 +63,11 @@ export function BookmarkCard({
             <DialogDescription>
               <div className="flex flex-wrap flex-col justify-start items-start">
                 <div className="w-full">
-                  {imgPreview ? (
-                    <img
-                      className="rounded-t-md w-full h-fit max-h-[320px] object-fill"
-                      src={imgPreview}
-                      alt={`${title} preview`}
-                    />
-                  ) : (
-                    <img
-                      className="w-full h-fit max-h-[220px] object-fill"
-                      src={imgFallback}
-                      alt={`${title} preview`}
-                    />
-                  )}
+                  <img
+                    className="rounded-t-md w-full h-fit max-h-[320px]  object-fill"
+                    src={imgPreview || imgFallback}
+                    alt={`${title} preview`}
+                  />
                   <div className="mt-3 flex justify-between items-center">
                     <div>
                       <Badge>{category}</Badge>

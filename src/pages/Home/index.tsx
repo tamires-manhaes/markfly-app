@@ -18,7 +18,9 @@ import { FormNewBookmark } from "./form-new-bookmark";
 import { FormNewCategory } from "./form-new-category";
 
 export function HomePage() {
-  const { bookmarks, handleDelete, handlePin } = useBookmark();
+  const { pinnedBookmarks, handleDelete, handlePin } = useBookmark({
+    category_id: null,
+  });
   const { categories } = useCategory();
 
   return (
@@ -32,7 +34,7 @@ export function HomePage() {
             </DialogTrigger>
           </div>
           <div className="grid grid-cols-3 gap-2 max-w-7xl mx-auto auto-rows-fr">
-            {bookmarks.map((bookmark: BookmarkResponse) => (
+            {pinnedBookmarks.map((bookmark: BookmarkResponse) => (
               <BookmarkCard
                 id={bookmark.id}
                 key={bookmark.id}

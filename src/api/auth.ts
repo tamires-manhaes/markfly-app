@@ -16,6 +16,7 @@ interface SignUpRequest {
   name: string;
   email: string;
   password: string;
+  locale: string;
 }
 
 type SignUpResponse = void;
@@ -70,12 +71,14 @@ export async function signUp({
   name,
   email,
   password,
+  locale,
 }: SignUpRequest): Promise<SignUpResponse> {
   await api.post("users", {
     json: {
       name,
       email,
       password,
+      locale,
     },
   });
 }

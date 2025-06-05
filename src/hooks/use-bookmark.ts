@@ -4,14 +4,28 @@ import {
   getBookmarks,
   pinnedBookmark,
 } from "@/api/bookmark";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
-export const useBookmark = () => {
+export const useBookmark = ({
+  category_id,
+}: {
+  category_id: string | null;
+}) => {
   const [bookmarks, setBookmarks] = useState<BookmarkResponse[]>([]);
 
   useEffect(() => {
     getBookmarks().then(setBookmarks);
   }, []);
+
+  const pinnedBookmarks = useMemo(() => {
+    return bookmarks.filter((mark) => mark.pinned === true);
+  }, [bookmarks]);
+
+  const bookmarkByCategory = useMemo(() => {
+    if (category_id) {
+      return bookmarks.filter((mark) => mark.category === category_id);
+    }
+  }, [category_id, bookmarks]);
 
   const handlePin = async (id: string, pinned: boolean) => {
     setBookmarks((prev) =>
@@ -37,5 +51,12 @@ export const useBookmark = () => {
     }
   };
 
-  return { bookmarks, handlePin, handleDelete, handleEdit };
+  return {
+    bookmarks,
+    pinnedBookmarks,
+    bookmarkByCategory,
+    handlePin,
+    handleDelete,
+    handleEdit,
+  };
 };

@@ -23,9 +23,11 @@ export function ProfileCard() {
   return (
     <div className="flex  items-center gap-3 outline-none mb-16">
       <div className="flex flex-col items-start">
-        <span className="text-xl font-medium text-slate-800 dark:text-slate-100">
-          {user.name}
-        </span>
+        <Link to="/">
+          <span className="text-xl font-medium text-slate-800 dark:text-slate-100">
+            {user.name}
+          </span>
+        </Link>
         <span className="text-sm text-muted-foreground">{user.email}</span>
         <Link to="/profile" className="underline text-sm text-muted-foreground">
           Ver perfil

@@ -12,6 +12,16 @@ import { Separator } from "@/components/ui/separator";
 import { useFormState } from "@/hooks/use-form-state";
 import { handleLogin } from "./actions";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { locales } from "@/locales";
+import getFlagByCode from "@/utils/flag-dict";
+import React from "react";
 
 export function SignInPage() {
   const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
@@ -26,7 +36,6 @@ export function SignInPage() {
       <div className="space-y-4">
         <div className="flex flex-row justify-between">
           <h2 className="font-sans text-4xl font-bold">mark.fly</h2>
-          <ThemeSwitcher />
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           {success === false && message && (
@@ -73,6 +82,25 @@ export function SignInPage() {
         </form>
 
         <Separator />
+
+        <div className="flex flex-row justify-between items-center">
+          <ThemeSwitcher />
+          <Select>
+            <SelectTrigger className="w-[100px]">
+              <SelectValue placeholder="Idioma" defaultValue="EN" />
+            </SelectTrigger>
+            <SelectContent>
+              {locales.map((l) => (
+                <SelectItem value={l.code} className="W-[90px]">
+                  {getFlagByCode(l.code) &&
+                    React.createElement(getFlagByCode(l.code)!, {
+                      className: "inline w-5 h-5",
+                    })}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     </AuthContainer>
   );
