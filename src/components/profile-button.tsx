@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, LogInIcon } from "lucide-react";
 
 import { getProfile } from "@/api/auth";
-import { getInitials } from "@/lib/get-initials";
+import { getInitials } from "@/utils/get-initials";
 
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
