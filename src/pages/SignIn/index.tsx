@@ -12,18 +12,12 @@ import { Separator } from "@/components/ui/separator";
 import { useFormState } from "@/hooks/use-form-state";
 import { handleLogin } from "./actions";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { locales } from "@/locales";
-import getFlagByCode from "@/utils/flag-dict";
-import React from "react";
+
+import { LanguageSelect } from "@/components/language-select";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function SignInPage() {
+  const { t } = useI18n();
   const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
     handleLogin,
     () => {
@@ -41,7 +35,7 @@ export function SignInPage() {
           {success === false && message && (
             <Alert variant="destructive">
               <AlertTriangle className="size-4" />
-              <AlertTitle>SIgn in failed!</AlertTitle>
+              <AlertTitle>Sign in failed!</AlertTitle>
               <AlertDescription>
                 <p>{message}</p>
               </AlertDescription>
@@ -57,14 +51,14 @@ export function SignInPage() {
             )}
           </div>
           <div className="space-y-1">
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password">{t("login.password")}</Label>
             <Input name="senha" type="password" id="senha" />
 
             <Link
               to="/auth/forgot-password"
               className="text-xs font-medium text-foreground hover:underline"
             >
-              Esqueceu sua senha?
+              {t("login.forget-password")}
             </Link>
           </div>
 
@@ -73,11 +67,15 @@ export function SignInPage() {
             className="w-full pointer-events-auto cursor-pointer"
             disabled={isPending}
           >
-            {isPending ? <Loader2 className="size- animate-spin" /> : "Login"}
+            {isPending ? (
+              <Loader2 className="size- animate-spin" />
+            ) : (
+              t("login.login-button")
+            )}
           </Button>
 
           <Button variant="link" className="w-full" size="sm" asChild>
-            <Link to="/auth/sign-up">Criar nova conta</Link>
+            <Link to="/auth/sign-up">{t("login.create-account")}</Link>
           </Button>
         </form>
 
@@ -85,21 +83,7 @@ export function SignInPage() {
 
         <div className="flex flex-row justify-between items-center">
           <ThemeSwitcher />
-          <Select>
-            <SelectTrigger className="w-[100px]">
-              <SelectValue placeholder="Idioma" defaultValue="EN" />
-            </SelectTrigger>
-            <SelectContent>
-              {locales.map((l) => (
-                <SelectItem value={l.code} className="W-[90px]">
-                  {getFlagByCode(l.code) &&
-                    React.createElement(getFlagByCode(l.code)!, {
-                      className: "inline w-5 h-5",
-                    })}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <LanguageSelect />
         </div>
       </div>
     </AuthContainer>

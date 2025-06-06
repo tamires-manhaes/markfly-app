@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-
 import AuthContainer from "@/components/container/auth";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
@@ -15,14 +14,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { locales } from "@/locales";
-import { useFormState } from "@/hooks/use-form-state";
-import { handleSignUp } from "./actions";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import getFlagByCode from "@/utils/flag-dict";
-import React from "react";
+import { LanguageSelect } from "@/components/language-select";
+
+import { useFormState } from "@/hooks/use-form-state";
+import { useI18n } from "@/hooks/use-i18n";
+import { handleSignUp } from "./actions";
 
 export function SignUpPage() {
+  const { t, languages } = useI18n();
   const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
     handleSignUp,
     () => {
@@ -46,7 +46,7 @@ export function SignUpPage() {
             </Alert>
           )}
           <div className="space-y-1">
-            <Label htmlFor="name">Nome</Label>
+            <Label htmlFor="name">{t("new-account.name")}</Label>
             <Input name="name" type="name" id="name" />
             {errors?.name && (
               <p className="text-xs font-medium text-red-500 dark:text-red-400">
@@ -65,7 +65,7 @@ export function SignUpPage() {
             )}
           </div>
           <div className="space-y-1">
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password">{t("new-account.password")}</Label>
             <Input name="password" type="password" id="password" />
             {errors?.password && (
               <p className="text-xs font-medium text-red-500 dark:text-red-400">
@@ -74,7 +74,9 @@ export function SignUpPage() {
             )}
           </div>
           <div className="space-y-1">
-            <Label htmlFor="password_confirmation">Confirme sua senha</Label>
+            <Label htmlFor="password_confirmation">
+              {t("new-account.confirm-password")}
+            </Label>
             <Input
               name="password_confirmation"
               type="password"
@@ -88,13 +90,13 @@ export function SignUpPage() {
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="locale">Idioma</Label>
+            <Label htmlFor="locale">{t("new-account.language")}</Label>
             <Select name="locale">
               <SelectTrigger className="">
-                <SelectValue placeholder="Idioma" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {locales?.map((locale) => (
+                {languages?.map((locale) => (
                   <SelectItem value={locale.code}>{locale.name}</SelectItem>
                 ))}
               </SelectContent>
@@ -114,33 +116,21 @@ export function SignUpPage() {
             {isPending ? (
               <Loader2 className="size- animate-spin" />
             ) : (
-              "Criar conta"
+              t("new-account.create-button")
             )}
           </Button>
 
           <Button className="w-full" variant="link" size="sm" asChild>
-            <Link to="/auth/sign-in">Ja tem uma conta? Entre</Link>
+            <Link to="/auth/sign-in">
+              {t("new-account.already-have-account")}
+            </Link>
           </Button>
 
           <Separator />
 
           <div className="flex flex-row justify-between items-center">
             <ThemeSwitcher />
-            <Select>
-              <SelectTrigger className="w-[100px]">
-                <SelectValue placeholder="Idioma" defaultValue="EN" />
-              </SelectTrigger>
-              <SelectContent>
-                {locales.map((l) => (
-                  <SelectItem value={l.code} className="W-[90px]">
-                    {getFlagByCode(l.code) &&
-                      React.createElement(getFlagByCode(l.code)!, {
-                        className: "inline w-5 h-5",
-                      })}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <LanguageSelect />
           </div>
         </form>
       </div>

@@ -16,8 +16,10 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FormNewBookmark } from "./form-new-bookmark";
 import { FormNewCategory } from "./form-new-category";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function HomePage() {
+  const { t } = useI18n();
   const { bookmarks, handleDelete, handlePin } = useBookmark({
     category_id: null,
   });
@@ -28,7 +30,7 @@ export function HomePage() {
       <Dialog>
         <div className="flex flex-col gap-4 ">
           <div className="flex flex-row w-full justify-between">
-            <h1 className="text-2xl font-bold">Bookmarks</h1>
+            <h1 className="text-2xl font-bold">{t("home.bookmarks")}</h1>
             <DialogTrigger className="cursor-pointer bg-slate-700 dark:bg-slate-400 w-10 h-10 flex justify-center items-center">
               <Plus className="size-5 text-slate-50 dark:text-slate-50" />
             </DialogTrigger>
@@ -55,11 +57,13 @@ export function HomePage() {
         </div>
 
         <DialogContent className="w-full">
-          <DialogTitle>Novo</DialogTitle>
+          <DialogTitle>{t("dialog.title")}</DialogTitle>
           <Tabs defaultValue="link" className="">
             <TabsList>
-              <TabsTrigger value="link">Novo Link</TabsTrigger>
-              <TabsTrigger value="category">Nova Categoria</TabsTrigger>
+              <TabsTrigger value="link">{t("new-link.label")}</TabsTrigger>
+              <TabsTrigger value="category">
+                {t("new-category.label")}
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="link" className="w-full">
               <FormNewBookmark />

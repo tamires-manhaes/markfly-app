@@ -18,8 +18,10 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function FormNewBookmark() {
+  const { t } = useI18n();
   const [categories, setCategories] = useState<CategoryResponse[]>();
   const [{ success, message, errors }, handleSubmit, isPending] =
     useFormState(handleNewBookmark);
@@ -49,7 +51,7 @@ export function FormNewBookmark() {
         </Alert>
       )}
       <div className="space-y-1">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">{t("new-link.title")}</Label>
         <Input name="title" type="title" id="title" />
         {errors?.title && (
           <p className="text-xs font-medium text-red-500 dark:text-red-400">
@@ -68,7 +70,7 @@ export function FormNewBookmark() {
           )}
         </div>
         <div className="space-y-1 w-[20%] pl-6">
-          <Label htmlFor="pinned">Pinned</Label>
+          <Label htmlFor="pinned">{t("new-link.pinned")}</Label>
           <Toggle className="mr-2" id="pinned" name="pinned">
             <Heart className="size-5" />
           </Toggle>
@@ -77,7 +79,7 @@ export function FormNewBookmark() {
 
       <div className="flex flex-wrap justify-between">
         <div className="space-y-1 w-[calc(50%-10px)] ">
-          <Label htmlFor="category">Category</Label>
+          <Label htmlFor="category">{t("new-link.category")}</Label>
           <Select name="category">
             <SelectTrigger className="">
               <SelectValue placeholder="Category" />
@@ -110,7 +112,11 @@ export function FormNewBookmark() {
         className="w-full pointer-events-auto cursor-pointer"
         disabled={isPending}
       >
-        {isPending ? <Loader2 className="size- animate-spin" /> : "Salvar"}
+        {isPending ? (
+          <Loader2 className="size- animate-spin" />
+        ) : (
+          t("new-link.save")
+        )}
       </Button>
     </form>
   );

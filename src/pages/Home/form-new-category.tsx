@@ -6,8 +6,10 @@ import { useFormState } from "@/hooks/use-form-state";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function FormNewCategory() {
+  const { t } = useI18n();
   const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
     handleNewCategory,
     () => {
@@ -28,7 +30,7 @@ export function FormNewCategory() {
       )}
 
       <div className="space-y-1">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">{t("new-category.name")}</Label>
         <Input name="name" type="name" id="name" />
         {errors?.name && (
           <p className="text-xs font-medium text-red-500 dark:text-red-400">
@@ -42,7 +44,11 @@ export function FormNewCategory() {
         className="w-full pointer-events-auto cursor-pointer"
         disabled={isPending}
       >
-        {isPending ? <Loader2 className="size- animate-spin" /> : "Salvar"}
+        {isPending ? (
+          <Loader2 className="size- animate-spin" />
+        ) : (
+          t("new-category.name")
+        )}
       </Button>
     </form>
   );
