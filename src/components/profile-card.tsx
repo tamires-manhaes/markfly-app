@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 import { getProfile } from "@/api/auth";
 
-import { Link } from "react-router";
+import { useI18n } from "@/hooks/use-i18n";
 
 export function ProfileCard() {
+  const { t } = useI18n();
   const [user, setUser] = useState<{
     name: string;
     email: string;
@@ -15,8 +17,9 @@ export function ProfileCard() {
 
   useEffect(() => {
     (async () => {
-      const profile = await getProfile();
-      setUser({ email: profile.email, name: profile.name });
+      await getProfile().then((res) => {
+        setUser({ email: res.email, name: res.name });
+      });
     })();
   }, []);
 
@@ -30,7 +33,7 @@ export function ProfileCard() {
         </Link>
         <span className="text-sm text-muted-foreground">{user.email}</span>
         <Link to="/profile" className="underline text-sm text-muted-foreground">
-          Ver perfil
+          {t("home.see-profile")}
         </Link>
       </div>
     </div>
