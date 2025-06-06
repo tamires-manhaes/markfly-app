@@ -38,7 +38,7 @@ export function BookmarkCard({
   return (
     <>
       <Dialog>
-        <DialogTrigger className="relative cursor-pointer bg-slate-200 dark:bg-slate-400 rounded-lg shadow-mdborder border-gray-200 row-span-1  w-full hover:scale-105 transition-all">
+        <DialogTrigger className="relative min-h-[240px] cursor-pointer bg-slate-200 dark:bg-slate-400 rounded-lg shadow-sm  row-span-1 w-full hover:scale-105 transition-all">
           <div
             className="h-full flex flex-col justify-between items-center"
             id={id}
@@ -49,7 +49,7 @@ export function BookmarkCard({
               alt={`${title} preview`}
             />
 
-            <div className="p-2 flex justify-center items-center flex-col mb-2">
+            <div className="p-2 flex justify-center items-center flex-col mb-2 m-auto">
               <h3 className="font-semibold text-md mb-1 dark:text-slate-700 text-slate-800">
                 {title}
               </h3>
@@ -73,11 +73,12 @@ export function BookmarkCard({
                       <Badge>{category}</Badge>
                     </div>
                     <div>
-                      {tags?.map((tag) => (
-                        <Badge variant="secondary" key={tag}>
-                          {tag}
-                        </Badge>
-                      ))}
+                      {tags &&
+                        tags?.map((tag) => (
+                          <Badge variant="secondary" key={tag}>
+                            {tag}
+                          </Badge>
+                        ))}
                     </div>
                   </div>
                 </div>
