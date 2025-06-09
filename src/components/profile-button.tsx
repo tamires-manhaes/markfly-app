@@ -24,7 +24,6 @@ export function ProfileButton() {
   useEffect(() => {
     (async () => {
       const profile = await getProfile();
-      console.log(profile);
       setUser({ email: profile.email, name: profile.name });
     })();
   }, []);

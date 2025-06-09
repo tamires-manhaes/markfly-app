@@ -4,8 +4,10 @@ import { Link } from "react-router";
 import { getProfile } from "@/api/auth";
 
 import { useI18n } from "@/hooks/use-i18n";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ProfileCard() {
+  const isMobile = useIsMobile();
   const { t } = useI18n();
   const [user, setUser] = useState<{
     name: string;
@@ -24,10 +26,14 @@ export function ProfileCard() {
   }, []);
 
   return (
-    <div className="flex  items-center gap-3 outline-none mb-16">
+    <div
+      className={`flex  items-center gap-3 outline-none ${
+        isMobile ? "mb-2" : "mb-16"
+      }`}
+    >
       <div className="flex flex-col items-start">
         <Link to="/">
-          <span className="text-xl font-medium text-slate-800 dark:text-slate-100">
+          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             {user.name}
           </span>
         </Link>

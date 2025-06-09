@@ -38,13 +38,16 @@ export function BookmarkCard({
   return (
     <>
       <Dialog>
-        <DialogTrigger className="relative min-h-[240px] cursor-pointer bg-slate-200 dark:bg-slate-400 rounded-lg shadow-sm  row-span-1 w-full hover:scale-105 transition-all">
+        <DialogTrigger
+          className={`w-[calc(100%/2-10px)] md:w-[calc(100%/2-20px)] lg:w-[calc(100%/3-10px)] 2xl:w-[calc(100%/4-20px)]
+           relative min-h-[240px] h-full cursor-pointer bg-slate-200 dark:bg-slate-400 rounded-lg shadow-sm mb-2  hover:scale-105 transition-all`}
+        >
           <div
-            className="h-full flex flex-col justify-between items-center"
+            className="h-full flex flex-col max-h-[240px] justify-between items-center"
             id={id}
           >
             <img
-              className="rounded-t-md w-full h-fit max-h-[160px] min-h-[160px] object-fill"
+              className="rounded-t-md w-full max-h-[160px] h-full object-fill"
               src={imgPreview || imgFallback}
               alt={`${title} preview`}
             />
@@ -53,7 +56,11 @@ export function BookmarkCard({
               <h3 className="font-semibold text-md mb-1 dark:text-slate-700 text-slate-800">
                 {title}
               </h3>
-              {category && <Badge>{category}</Badge>}
+              {category && (
+                <Badge className="bg-gradient-to-r from-blue-600 to-purple-600 ">
+                  {category}
+                </Badge>
+              )}
             </div>
           </div>
         </DialogTrigger>

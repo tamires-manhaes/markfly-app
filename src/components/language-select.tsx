@@ -23,12 +23,12 @@ export const LanguageSelect = () => {
   };
   return (
     <Select value={currentLanguage} onValueChange={changeLanguage}>
-      <SelectTrigger className="w-[100px]" value={currentLanguage}>
+      <SelectTrigger className="w-[80px]" value={currentLanguage}>
         <SelectValue placeholder="Idioma" defaultValue="EN" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="w-[60px]">
         {languages.map((l) => (
-          <SelectItem key={l.code} value={l.code} className="W-[90px]">
+          <SelectItem key={l.code} value={l.code}>
             {l.flag}
           </SelectItem>
         ))}
