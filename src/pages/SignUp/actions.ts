@@ -45,7 +45,6 @@ export async function handleSignUp(data: FormData): Promise<FormState> {
     await signUp(data);
     window.location.replace("/auth/sign-in");
   } catch (err) {
-    console.log(err);
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();
 

@@ -20,6 +20,7 @@ import { LanguageSelect } from "@/components/language-select";
 import { useFormState } from "@/hooks/use-form-state";
 import { useI18n } from "@/hooks/use-i18n";
 import { handleSignUp } from "./actions";
+import { Logo } from "@/assets/logo";
 
 export function SignUpPage() {
   const { t, languages } = useI18n();
@@ -33,7 +34,9 @@ export function SignUpPage() {
     <AuthContainer>
       <div className="space-y-4">
         <div className="flex flex-row justify-between">
-          <h2 className="font-sans text-4xl font-bold">mark.fly</h2>
+          <Link to="/">
+            <Logo />
+          </Link>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           {success === false && message && (
@@ -110,7 +113,7 @@ export function SignUpPage() {
 
           <Button
             type="submit"
-            className="w-full cursor-pointer"
+            className="w-full cursor-pointer bg-gradient-to-br from-blue-600 to-purple-600"
             disabled={isPending}
           >
             {isPending ? (

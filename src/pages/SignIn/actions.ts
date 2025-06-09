@@ -31,7 +31,6 @@ export async function handleLogin(data: FormData) {
     Cookies.set("locale", locale);
     window.location.replace("/");
   } catch (err) {
-    console.log(err);
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();
 

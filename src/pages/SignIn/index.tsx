@@ -15,6 +15,7 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 
 import { LanguageSelect } from "@/components/language-select";
 import { useI18n } from "@/hooks/use-i18n";
+import { Logo } from "@/assets/logo";
 
 export function SignInPage() {
   const { t } = useI18n();
@@ -29,7 +30,9 @@ export function SignInPage() {
     <AuthContainer>
       <div className="space-y-4">
         <div className="flex flex-row justify-between">
-          <h2 className="font-sans text-4xl font-bold">mark.fly</h2>
+          <Link to="/">
+            <Logo />
+          </Link>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           {success === false && message && (
@@ -64,7 +67,7 @@ export function SignInPage() {
 
           <Button
             type="submit"
-            className="w-full pointer-events-auto cursor-pointer"
+            className="w-full pointer-events-auto cursor-pointer bg-gradient-to-br from-blue-600 to-purple-600"
             disabled={isPending}
           >
             {isPending ? (
@@ -74,7 +77,7 @@ export function SignInPage() {
             )}
           </Button>
 
-          <Button variant="link" className="w-full" size="sm" asChild>
+          <Button variant="link" className="w-full " size="sm" asChild>
             <Link to="/auth/sign-up">{t("login.create-account")}</Link>
           </Button>
         </form>
