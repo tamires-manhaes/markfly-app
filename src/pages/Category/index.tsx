@@ -44,7 +44,7 @@ export function CategoryPage() {
               <Plus className="size-5 text-slate-50 dark:text-slate-50" />
             </DialogTrigger>
           </div>
-          <div className="flex flex-wrap items-start justify-around mx-auto">
+          <div className="flex flex-wrap items-start justify-around mx-auto w-full">
             {bookmarkByCategory ? (
               bookmarkByCategory.map((bookmark: BookmarkResponse) => (
                 <BookmarkCard

@@ -29,7 +29,7 @@ export async function handleLogin(data: FormData) {
 
     Cookies.set("token", token);
     Cookies.set("locale", locale);
-    window.location.replace("/");
+    window.location.replace("/home");
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();

@@ -23,7 +23,8 @@ function AuthRedirect() {
     if (
       token &&
       (location.pathname === "/auth/sign-in" ||
-        location.pathname === "/auth/sign-up")
+        location.pathname === "/auth/sign-up" ||
+        location.pathname === "/")
     ) {
       navigate("/home", { replace: true });
     }

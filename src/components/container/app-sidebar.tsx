@@ -11,6 +11,7 @@ import {
 import type { CategoryResponse } from "@/api/category";
 import type { MouseEventHandler } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router";
 
 interface AppSideBarProps {
   categories: CategoryResponse[];
@@ -65,7 +66,7 @@ export const AppSideBar = ({ categories, handleLogout }: AppSideBarProps) => {
                 key={category.id}
                 className="text-slate-800 dark:text-slate-100 hover:underline"
               >
-                <a href={`/categories/${category.id}`}>{category.name}</a>
+                <Link to={`/categories/${category.id}`}>{category.name}</Link>
               </li>
             ))}
           </ul>
