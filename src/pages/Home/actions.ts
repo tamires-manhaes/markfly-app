@@ -49,7 +49,6 @@ export async function handleNewCategory(data: FormData) {
     await createCategory(result.data.name, userId);
     window.location.replace("/");
   } catch (err) {
-    console.log(err);
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();
 
@@ -88,7 +87,6 @@ export async function handleNewBookmark(data: FormData) {
       window.location.replace("/");
     }
   } catch (err) {
-    console.log(err);
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();
 

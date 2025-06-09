@@ -1,4 +1,3 @@
-import { Plus } from "lucide-react";
 import { type BookmarkResponse } from "@/api/bookmark";
 import { useBookmark } from "@/hooks/use-bookmark";
 import { useCategory } from "@/hooks/use-category";
@@ -17,6 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FormNewBookmark } from "./form-new-bookmark";
 import { FormNewCategory } from "./form-new-category";
 import { useI18n } from "@/hooks/use-i18n";
+import { Plus } from "lucide-react";
 
 export function HomePage() {
   const { t } = useI18n();
@@ -31,11 +31,11 @@ export function HomePage() {
         <div className="flex flex-col gap-4 ">
           <div className="flex flex-row w-full justify-between">
             <h1 className="text-2xl font-bold">{t("home.bookmarks")}</h1>
-            <DialogTrigger className="cursor-pointer bg-slate-700 dark:bg-slate-400 w-10 h-10 flex justify-center items-center">
+            <DialogTrigger className="cursor-pointer bg-gradient-to-br from-blue-600 to-purple-600  w-10 h-10 flex justify-center items-center">
               <Plus className="size-5 text-slate-50 dark:text-slate-50" />
             </DialogTrigger>
           </div>
-          <div className="grid grid-cols-3 gap-4 max-w-7xl mx-auto auto-rows-fr">
+          <div className="flex flex-wrap items-start justify-around mx-auto">
             {bookmarks.map((bookmark: BookmarkResponse) => (
               <BookmarkCard
                 id={bookmark.id}

@@ -14,6 +14,7 @@ import { Plus } from "lucide-react";
 import { useParams } from "react-router";
 import { FormNewBookmark } from "../Home/form-new-bookmark";
 import { FormNewCategory } from "../Home/form-new-category";
+import { useMemo } from "react";
 
 export function CategoryPage() {
   const params = useParams<{ categoryId: string }>();
@@ -21,35 +22,50 @@ export function CategoryPage() {
     category_id: params.categoryId ?? null,
   });
   const { categories } = useCategory();
+  const categoryName = useMemo(() => {
+    if (categories) {
+      const category = categories.find(
+        (category) => category.id === params.categoryId
+      );
+
+      return category?.name || "Bookmarks";
+    }
+  }, [params.categoryId, categories]);
 
   return (
     <CommomContainer>
       <Dialog>
         <div className="flex flex-col gap-4 ">
           <div className="flex flex-row w-full justify-between">
-            <h1 className="text-2xl font-bold">Bookmarks</h1>
-            <DialogTrigger className="cursor-pointer bg-slate-700 dark:bg-slate-400 w-10 h-10 flex justify-center items-center">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              {categoryName}
+            </h1>
+            <DialogTrigger className="cursor-pointer bg-gradient-to-br from-blue-600 to-purple-600 w-10 h-10 flex justify-center items-center">
               <Plus className="size-5 text-slate-50 dark:text-slate-50" />
             </DialogTrigger>
           </div>
-          <div className="grid grid-cols-3 gap-2 max-w-7xl mx-auto auto-rows-fr">
-            {bookmarkByCategory?.map((bookmark: BookmarkResponse) => (
-              <BookmarkCard
-                id={bookmark.id}
-                key={bookmark.id}
-                title={bookmark.title}
-                url={bookmark.url}
-                tags={bookmark.tags}
-                pinned={bookmark.pinned}
-                category={
-                  categories.find((cat) => cat.id === bookmark.category)
-                    ?.name || ""
-                }
-                imgPreview={bookmark.imgPreview}
-                onPin={handlePin}
-                onDelete={handleDelete}
-              />
-            ))}
+          <div className="flex flex-wrap items-start justify-around mx-auto">
+            {bookmarkByCategory ? (
+              bookmarkByCategory.map((bookmark: BookmarkResponse) => (
+                <BookmarkCard
+                  id={bookmark.id}
+                  key={bookmark.id}
+                  title={bookmark.title}
+                  url={bookmark.url}
+                  tags={bookmark.tags}
+                  pinned={bookmark.pinned}
+                  category={
+                    categories.find((cat) => cat.id === bookmark.category)
+                      ?.name || ""
+                  }
+                  imgPreview={bookmark.imgPreview}
+                  onPin={handlePin}
+                  onDelete={handleDelete}
+                />
+              ))
+            ) : (
+              <h2 className="text-sla">Nothing here</h2>
+            )}
           </div>
         </div>
 
