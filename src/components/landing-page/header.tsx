@@ -6,10 +6,12 @@ import { ThemeSwitcher } from "../theme-switcher";
 import { useI18n } from "@/hooks/use-i18n";
 import { Logo } from "@/assets/logo";
 import { Link } from "react-router";
+import { useSentry } from "@/hooks/use.sentry";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useI18n();
+  const { captureEvent } = useSentry();
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-md border-b border-border z-50">
@@ -33,13 +35,31 @@ const Header = () => {
             >
               {t("landing-page.header.about")}
             </a>
-            <Button asChild variant="outline" size="sm">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                captureEvent({
+                  message: "Sign In Clicked",
+                  level: "info",
+                  tags: { feature: "header", button: "sign-in" },
+                })
+              }
+            >
               <Link to="/auth/sign-in">{t("landing-page.header.signin")}</Link>
             </Button>
             <Button
               asChild
               size="sm"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              onClick={() =>
+                captureEvent({
+                  message: "Sign Up Clicked",
+                  level: "info",
+                  tags: { feature: "header", button: "sign-in" },
+                })
+              }
             >
               <Link to="/auth/sign-up">{t("landing-page.header.started")}</Link>
             </Button>
