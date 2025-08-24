@@ -1,54 +1,112 @@
-# React + TypeScript + Vite
+# Markfly Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Markfly Web é uma aplicação de gerenciamento de bookmarks desenvolvida com **React**, **TypeScript** e **Vite**. Este projeto oferece autenticação, categorização, visualização e organização de links favoritos, com suporte a temas, internacionalização e interface responsiva.
 
-Currently, two official plugins are available:
+## Principais Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. Autenticação de Usuário
 
-## Expanding the ESLint configuration
+- Cadastro e login de usuários.
+- Persistência de sessão via cookies.
+- Redirecionamento automático para páginas protegidas.
+- Contexto de autenticação (`src/context/auth/`).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. Gerenciamento de Bookmarks
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Adição, edição e remoção de bookmarks.
+- Visualização de bookmarks em cards com imagem de preview.
+- Marcação de bookmarks como "pinned" (fixados).
+- Organização por categorias personalizadas.
+- Formulários para novo bookmark e nova categoria (`src/pages/Home/`).
+
+### 3. Categorias
+
+- Criação, edição e exclusão de categorias.
+- Visualização de bookmarks filtrados por categoria.
+- Página dedicada para cada categoria (`src/pages/Category/`).
+
+### 4. Interface Responsiva
+
+- Layout adaptado para mobile, tablet e desktop.
+- Navegação lateral para desktop e menu simplificado para mobile.
+- Breakpoints configurados em `tailwind.config.js`.
+
+### 5. Internacionalização (i18n)
+
+- Suporte a múltiplos idiomas: Português, Inglês e Espanhol.
+- Seleção dinâmica de idioma via componente `LanguageSelect`.
+- Traduções organizadas em `src/locales/`.
+
+### 6. Temas (Dark/Light)
+
+- Alternância de tema via componente `ThemeSwitcher`.
+- Persistência da preferência do usuário.
+
+### 7. UI Customizada com shadcn/ui e Tailwind CSS
+
+- Componentes reutilizáveis: botão, badge, card, input, select, dialog, etc.
+- Estilização moderna e acessível.
+- Utilização de SVGs como componentes React.
+
+### 8. Página de Landing
+
+- Apresentação das principais funcionalidades.
+- Navegação clara para login/cadastro.
+- Seções de features e sobre.
+
+### 9. Outros Recursos
+
+- Avatar e perfil do usuário.
+- Separação clara entre páginas públicas e privadas.
+- Utilização de hooks customizados para lógica de negócio.
+- Validação e feedback em formulários.
+
+## Estrutura de Pastas
+
+```
+src/
+  api/                # Requisições para backend
+  assets/             # Imagens, SVGs e logo
+  components/         # Componentes reutilizáveis e de UI
+  context/            # Contextos globais (ex: auth)
+  hooks/              # Hooks customizados
+  lib/                # Bibliotecas utilitárias (ex: i18n, sentry)
+  locales/            # Traduções
+  pages/              # Páginas principais da aplicação
+  utils/              # Funções utilitárias
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Como rodar o projeto
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Instale as dependências:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+   ```sh
+   npm install
+   ```
+
+2. Inicie o servidor de desenvolvimento:
+
+   ```sh
+   npm run dev
+   ```
+
+3. Acesse `http://localhost:5173` no navegador.
+
+## Configuração de Ambiente
+
+- Variáveis de ambiente podem ser definidas em `.env` (exemplo: API base URL).
+- Para adicionar novos idiomas, crie um arquivo em `src/locales/` e atualize o `LanguageSelect`.
+
+## Testes e Lint
+
+- Lint: `npm run lint`
+- Testes: (implemente conforme sua stack preferida)
+
+## Contribuição
+
+Sinta-se à vontade para abrir issues e pull requests!
+
+---
+
+**Tecnologias:**  
+React • TypeScript • Vite • Tailwind CSS • shadcn/ui •
